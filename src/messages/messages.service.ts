@@ -9,8 +9,11 @@ export class MessagesService {
     @Inject('MESSAGE_REPOSITORY') private messageRepository: typeof Message,
   ) {}
 
-  create(createMessageDto: CreateMessageDto) {
-    return this.messageRepository.create(createMessageDto);
+  async create(createMessageDto: CreateMessageDto) {
+    const createdMessage = await this.messageRepository.create(
+      createMessageDto,
+    );
+    return this.findOne(createdMessage.id);
   }
 
   findAll() {
@@ -27,7 +30,16 @@ export class MessagesService {
   }
 
   findOne(id: number) {
-    return this.messageRepository.findByPk(id);
+    return this.messageRepository.findByPk(id, {
+      order: [['id', 'DESC']],
+      include: [
+        {
+          model: User,
+          required: true,
+          attributes: ['name', 'picture'],
+        },
+      ],
+    });
   }
 
   update(id: number, updateMessageDto: UpdateMessageDto) {
