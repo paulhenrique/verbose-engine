@@ -3,13 +3,19 @@ import { Message } from 'src/messages/entities/message.entity';
 
 @Table
 export class User extends Model<User> {
-  @Column
+  @Column({
+    allowNull: false,
+  })
   name: string;
 
-  @Column
+  @Column({
+    allowNull: false,
+  })
   password: string;
 
-  @Column
+  @Column({
+    allowNull: false,
+  })
   picture: string;
 
   @HasMany(() => Message)
