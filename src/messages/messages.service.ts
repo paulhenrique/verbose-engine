@@ -20,7 +20,7 @@ export class MessagesService {
         {
           model: User,
           required: true,
-          attributes: ['name'],
+          attributes: ['name', 'picture'],
         },
       ],
     });
