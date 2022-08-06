@@ -26,6 +26,6 @@ export class UsersService {
   }
 
   remove(id: number) {
-    return this.usersRepository.findByPk(id).then((e) => e.$remove);
+    return this.usersRepository.destroy({ where: { id } });
   }
 }
