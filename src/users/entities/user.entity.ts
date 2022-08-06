@@ -1,4 +1,5 @@
-import { Table, Column, Model } from 'sequelize-typescript';
+import { Table, Column, Model, HasMany } from 'sequelize-typescript';
+import { Message } from 'src/messages/entities/message.entity';
 
 @Table
 export class User extends Model<User> {
@@ -10,4 +11,7 @@ export class User extends Model<User> {
 
   @Column
   picture: string;
+
+  @HasMany(() => Message)
+  message: Message[];
 }
