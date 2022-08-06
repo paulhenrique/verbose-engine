@@ -21,6 +21,12 @@ export class UsersService {
     return this.usersRepository.findByPk(id);
   }
 
+  login(user: CreateUserDto) {
+    return this.usersRepository.findOne({
+      where: { name: user.name, password: user.password },
+    });
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     return this.usersRepository.update({ ...updateUserDto }, { where: { id } });
   }
